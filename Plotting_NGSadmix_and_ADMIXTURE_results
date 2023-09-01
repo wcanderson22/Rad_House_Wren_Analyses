@@ -1,0 +1,29 @@
+
+install.packages("conStruct")
+
+library(ggplot2)
+library(conStruct)
+
+#read in the data
+
+NGSAdmixData <- read.csv("378NGSAdmix - Sheet1.csv")
+AdmixtureData <- read.csv("378Admixture - Sheet1.csv")
+
+#plot the NGSAdmix data
+
+ggplot(NGSAdmixData, aes(fill=Type, x=Population, y=Percent)) +
+  geom_bar(position='stack', stat='identity', width=1, color="Black", size=.15) +
+  scale_fill_manual(values=c("Red", "Blue")) +
+  theme_classic()
+
+#plot the ADMIXTURE data
+ggplot(AdmixtureData, aes(fill=Type, x=Population, y=Percent)) +
+  geom_bar(position='stack', stat='identity', width=1, color="Black", size=.15) +
+  scale_fill_manual(values=c("Red", "Blue")) +
+  theme_classic()
+
+
+
+
+
+
