@@ -3,12 +3,12 @@
 library(gghybrid)
 
 #read in the data file
-dat <- read.data(file="undergrad95pfststructure.txt", nprecol=2,
+dat <- read.data(file="final7krad.strct_in", nprecol=2,
                  MISSINGVAL= -9,
-                 NUMINDS=125,
+                 NUMINDS=88,
                  ONEROW=T,
                  PLOIDY=2,
-                 NUMLOCI=378)
+                 NUMLOCI=7649)
 
 #Reconfigure the data to work with gghybrid
 prepdata <- data.prep(data=dat$data, loci=dat$loci, alleles=dat$alleles, S0="Western", S1=c("Eastern"), precols=dat$precols, max.S.MAF = 0.1, return.genotype.table=T, return.locus.table=T)
