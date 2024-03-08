@@ -56,16 +56,17 @@ summary(pca.results)
 svg(filename="/Users/willanderson/Desktop/Manuscript_code/HOWR_RAD_MS/PCA/rad_PCA.svg",width=11,height=8)
 
 ggplot(data=pcaData, aes(x=PC1, y=PC2, color=mtDNA)) + 
-  geom_point(aes(fill = POPID, stroke=1),
+  geom_point(aes(fill = POPID, stroke=2),
              size=5, 
              alpha=0.8,
              shape = 21) +
-  xlab("PC1, 44.88%") +
-  ylab("PC2, 10.54%") +
-  ggtitle("Principal Component Analysis with 378 informative SNPs")+
+  xlab("PC1, 2.712%") +
+  ylab("PC2, 2.318%") +
+  ggtitle("Principal Component Analysis with 9,633 SNPs")+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
         panel.background = element_blank(), axis.line = element_line(colour = "black")) +
-  scale_color_manual(values = c("Red", "Black", "Blue")) +
-  scale_fill_manual(values = c("Gray", "Red", "Blue"))
+  scale_color_manual(values = c("indianred3", "grey40", "steelblue2")) +
+  scale_fill_manual(values = c("Gray", "indianred3", "steelblue2"))
+
 
 dev.off()
