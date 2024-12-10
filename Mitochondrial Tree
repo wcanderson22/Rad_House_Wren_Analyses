@@ -1,1 +1,26 @@
 
+
+library(gdsfmt)
+library(SNPRelate)
+
+snpgdsVCF2GDS("final_rad.recode.vcf", "good_data.gds")
+snpgdsSummary("good_data.gds")
+genofile2 = snpgdsOpen("good_data.gds")
+
+
+set.seed(1000)
+snpset = snpgdsLDpruning(genofile2,ld.threshold = 1)
+snp.id=unlist(snpset)
+
+dissMatrix  =  snpgdsIBS(genofile2 , sample.id=NULL, snp.id=snp.id, autosome.only=TRUE, 
+                         remove.monosnp=TRUE,  maf=NaN, missing.rate=NaN, num.thread=2, verbose=TRUE)
+snpgdsClose(genofile2)
+
+snpHCluster =  snpgdsHCluster(dissMatrix, sample.id=NULL, need.mat=TRUE, hang=0.01)
+
+cutTree = snpgdsCutTree(snpHCluster, z.threshold=15, outlier.n=5, n.perm = 5000, samp.group=NULL, 
+                        col.outlier="red", col.list=NULL, pch.outlier=4, pch.list=NULL,label.H=FALSE, label.Z=TRUE, 
+                        verbose=TRUE)
+
+snpgdsDrawTree(cutTree, main = "Dataset 1",edgePar=list(col=rgb(0.5,0.5,0.5,0.75),t.col="black"),
+               y.label.kinship=T,leaflab="perpendicular")
