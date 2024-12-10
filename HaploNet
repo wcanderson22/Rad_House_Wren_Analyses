@@ -1,1 +1,53 @@
+install.packages("ape")
+install.packages("pegas")
+devtools::install_github("https://github.com/tidyverse/ggplot2/blob/main/man/ggsave.Rd")
+library(pegas)
+library(ape)
+library(ggsave)
+library(devtools)
+library(ggplot2)
+
+x <- readevtoolsx <- read.dna("Taedon Chruchhill no outgroup.fasta", format="fasta")
+
+
+nrow(x)
+
+p <- c("pop2", "pop2", "pop3", "pop2", "pop3", "pop3", "pop2", "pop2", "pop3", "pop2", "pop3", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop3", "pop3", "pop3", "pop2", "pop1", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop1", "pop1", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop1", "pop1", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop1", "pop2", "pop2", "pop1", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop1", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop2", "pop1", "pop2")
+
+h <- haplotype(x)
+
+d <- dist.dna(h, "N")
+
+nt <- rmst(d, quiet = TRUE)
+
+nt
+
+plot(nt)
+
+
+plot(nt, fast = TRUE)
+
+plot(nt, threshold = c(1, 14))
+
+(sz <- summary(h))
+
+(nt.labs <- attr(nt, "labels"))
+
+sz <- sz[nt.labs]
+
+plot(nt, size = sz)
+
+(P <- haploFreq(x, fac = p, haplo = h))
+
+setHaploNetOptions(labels=FALSE)
+
+plot(nt, size = sz, pie = P, legend = c(-25, 30))
+
+plot1 <- plot(nt, size = sz, pie = P, xy = xy)
+
+xy <- replot()
+
+ggsave("haplonet", plot1, device = "svg")
+
+
 
